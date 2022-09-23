@@ -1,5 +1,5 @@
 # vim.sv
-Custom syntax highlight, indent, and snippets for verilog and systemverilog.
+Custom selections and modifications of syntax highlight, indent, and snippets for verilog/systemverilog.
 
 ## References
 * [vhda/verilog_systemverilog.vim](https://github.com/vhda/verilog_systemverilog.vim)
