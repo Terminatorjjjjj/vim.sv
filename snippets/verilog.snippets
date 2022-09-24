@@ -139,14 +139,14 @@ snippet def
 snippet ifd
 	`ifdef ${1:macro}
 	${0}
-	`endif // $1
+	\`endif // $1
 
 # If define / else
 snippet ifde
 	`ifdef ${1:macro}
 	${0}
-	`else // $1
-	`endif // $1
+	\`else // $1
+	\`endif // $1
 # FF D-pin/Q-pin declaration
 snippet rdq
 	reg ${1}${2:reg}_q, $2_d;${0}
