@@ -113,7 +113,7 @@ syn match   systemverilogOperator    "[&|~><!)(*#%@+/=?:;}{,.\^\-\[\]]"
 syn region  systemverilogComment     start="/\*" end="\*/" contains=systemverilogTodo
 syn match   systemverilogComment     "//.*" contains=systemverilogTodo
 
-syn match   systemverilogGlobal      "`[a-zA-Z0-9_$]\+\>"
+syn match   systemverilogGlobal      "`[a-zA-Z0-9_$]\+"
 syn match   systemverilogGlobal      "`celldefine"
 syn match   systemverilogGlobal      "`default_nettype"
 syn match   systemverilogGlobal      "`define"
@@ -130,15 +130,16 @@ syn match   systemverilogGlobal      "`resetall"
 syn match   systemverilogGlobal      "`timescale"
 syn match   systemverilogGlobal      "`unconnected_drive"
 syn match   systemverilogGlobal      "`undef"
-syn match   systemverilogGlobal      "$[a-zA-Z0-9_$]\+\>"
+syn match   systemverilogGlobal      "$[a-zA-Z0-9_$]\+"
 
 syn match   systemverilogConstant    "\<[A-Z][A-Z0-9_$]*\>"
 
-syn match   systemverilogNumber      "\(\<\d\+\|\)'[bB]\s*[0-1_xXzZ?]\+\>"
-syn match   systemverilogNumber      "\(\<\d\+\|\)'[oO]\s*[0-7_xXzZ?]\+\>"
-syn match   systemverilogNumber      "\(\<\d\+\|\)'[dD]\s*[0-9_xXzZ?]\+\>"
-syn match   systemverilogNumber      "\(\<\d\+\|\)'[hH]\s*[0-9a-fA-F_xXzZ?]\+\>"
-syn match   systemverilogNumber      "\<[+-]\=[0-9_]\+\(\.[0-9_]*\|\)\(e[0-9_]*\|\)\>"
+syn match   systemverilogNumber      "\(\d\+\)\?'[sS]\?[bB]\s*[0-1_xXzZ?]\+"
+syn match   systemverilogNumber      "\(\d\+\)\?'[sS]\?[oO]\s*[0-7_xXzZ?]\+"
+syn match   systemverilogNumber      "\(\d\+\)\?'[sS]\?[dD]\s*[0-9_xXzZ?]\+"
+syn match   systemverilogNumber      "\(\d\+\)\?'[sS]\?[hH]\s*[0-9a-fA-F_xXzZ?]\+"
+syn match   systemverilogNumber      "\<[+-]\?[0-9_]\+\(\.[0-9_]*\)\?\(e[0-9_]*\)\?\>"
+syn match   systemverilogNumber      "\<\d[0-9_]*\(\.[0-9_]\+\)\=\([fpnum]\)\=s\>"
 
 syn region  systemverilogString      start=+"+ skip=+\\"+ end=+"+ contains=systemverilogEscape
 syn match   systemverilogEscape      +\\[nt"\\]+ contained
