@@ -1,4 +1,199 @@
-extends verilog
+# If statement
+snippet if
+	if (${1}) begin
+		${0}
+	end
+# If/else statements
+snippet ife
+	if (${1}) begin
+		${2}
+	end
+	else begin
+		${3}
+	end
+# Else if statement
+snippet eif
+	else if (${1}) begin
+		${0}
+	end
+# Else statement
+snippet el
+	else begin
+		${0}
+	end
+# While statement
+snippet wh
+	while (${1}) begin
+		${0}
+	end
+# Repeat loop
+snippet rep
+	repeat (${1}) begin
+		${0}
+	end
+# Case statement
+snippet case
+	case (${1:/* param */})
+		${2:/* value */}
+		default: ${0}
+	endcase
+# CaseZ statement
+snippet casez
+	casez (${1:/* param */})
+		${2:/* value */}:
+		default: ${0}
+	endcase
+# CaseX statement
+snippet casex
+	casex (${1:/* param */})
+		${2:/* value */}:
+		default: ${0}
+	endcase
+# Always block
+snippet alw
+	always @(${1:/* sensitive list */}) begin
+		${0}
+	end
+# Sequential logic
+snippet alp
+	always @(posedge ${1:clk}) begin
+		${0}
+	end
+# Sequential logic with rst
+snippet alpr
+	always @(posedge ${1:clk} or negedge ${2:rst_n}) begin
+		if (~$2) begin
+			${0}
+		end
+		else begin
+		end
+	end
+# Generate
+snippet gen
+	generate
+	${0}
+	endgenerate
+# Module block
+snippet mod
+	module ${1:name} (
+		${0}
+	);
+
+        `protect
+
+        `endprotect
+
+	endmodule // $1
+# For with interger
+snippet fori
+	for (int ${1:i}=0; $1<${2:count}; $1${3:++}) begin
+		${0}
+	end
+# For with genvar
+snippet forn
+	for (${1:n}=0; $1<${2:count}; $1${3:++})
+	begin : ${4:label}
+		${0}
+	end
+# Forever
+snippet forev
+	forever begin
+		${0}
+	end
+# Function
+snippet fun
+	function ${1:name}(${2});
+		${0}
+	endfunction
+# Task
+snippet task
+	task ${1:name}(${2});
+		${0}
+	endtask
+# Initial 
+snippet ini
+	initial begin
+		${0}
+	end
+# Typedef struct packed
+snippet typesp
+	typedef struct packed {
+		int ${2:data};
+	} ${1:name};
+# Typedef eum
+snippet typee
+	typedef enum ${2:logic[15:0]}
+	{
+		${3:REG = 16'h0000}
+	} ${1:my_dest_t};
+# Timescale
+snippet tim
+	`timescale ${1:1ns}/${2:10ps}${0}
+# Include
+snippet inc
+	`include "${1}"${0}
+# Define
+snippet def
+	`define ${1}
+# If define
+snippet ifd
+	`ifdef ${1:macro}
+	${0}
+	\`endif
+# If define / else
+snippet ifde
+	`ifdef ${1:macro}
+	${0}
+	\`else
+	\`endif
+# FF D-pin/Q-pin declaration
+snippet reg
+	reg ${1}${2:reg}_q, $2_d;${0}
+# Input port
+snippet inp
+	input  ${1}i_${2:port},${0}
+# Output port
+snippet out
+	output ${1}o_${2:port},${0}
+# In/out port
+snippet ino
+	inout ${1}io_${2:port},${0}
+# Non-blocking assignment
+snippet as< Non-blocking assignment
+	${1:reg}_q <= \`${2:delay} $1_d;${0}
+# Blocking assignment
+snippet as= Blocking assignment
+	${1:reg}_d = $1_q;${0}
+# Wire assignment
+snippet ass
+	assign ${1:name} = ${2:value};${0}
+# Wire assignment with defualt value
+snippet wir
+	wire ${1:#:nbit} ${2:name} = ${3:value};${0}
+# Global Parameter
+snippet par
+	parameter ${1:name} = ${2:value},${0}
+# Local parameter
+snippet loc
+	localparam ${1} = ${2:};${0}
+# Dumpfile
+snippet dumpfile
+	$dumpfile("${1:`expand("%:r")`}.fsdb");${0}
+# Dumpvars
+snippet dumpvars
+	$dumpvars(${1:0}, ${2:`expand("%:r")`});${0}
+# Display
+snippet display
+	$display("${1}", ${2});
+# Strobe
+snippet strobe
+	$strobe("${1}", ${2});
+# Parameterized bit operand: 0
+snippet pa0
+	{${1:width}{1'b0}}${0}
+# Parameterized bit operand: 1
+snippet pa1
+	{{${1:width}-1{1'b0}}, 1'b1}${0}
 
 # Foreach Loop
 snippet forea
@@ -22,7 +217,7 @@ snippet alff
 	end
 # Sequential logic with rst
 snippet alfr
-	always_ff @(posedge ${1:clk} or negedge ${2:rst_n}) begin
+	always_ff @(posedge ${1:clk} or negedge ${2:rst_b}) begin
 		if (~$2) begin
 			${0}
 		end
@@ -36,7 +231,7 @@ snippet all
 	end
 # Class
 snippet cl
-	class ${1:class_name};
+	class ${1:name};
 		// data or class properties
 		${0}
 
@@ -56,7 +251,7 @@ snippet prog
 		${0}
 	endprogram : $1
 # Interface block
-snippet intf
+snippet interface
 	interface ${1:program_name} ();
 		// nets
 		${0}
@@ -71,16 +266,17 @@ snippet clock
 		${0}
 	endclocking : $1
 # Covergroup construct
-snippet cg
+snippet cov
 	covergroup ${1:group_name} @(${2:posedge} ${3:clk});
 		${0}
 	endgroup : $1
 # Package declaration
-snippet pkg
+snippet pac
 	package ${1:package_name};
 		${0}
 	endpackage : $1
 # FF D-pin/Q-pin declaration
-snippet ldq
+snippet log
 	logic ${1}${2:reg}_q, $2_d;${0}
+
 # vim: ts=8
